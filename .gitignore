@@ -1,160 +1,38 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+import numpy as np
+import matplotlib.pyplot as plt
 
-# C extensions
-*.so
+# Given dataset
+X = np.array([2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+Y = np.array([30, 25, 95, 115, 265, 325, 570, 700, 1085, 1300])
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+# Calculate the mean of X and Y
+mean_X = np.mean(X)
+mean_Y = np.mean(Y)
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# Calculate 𝑏1 (slope) and 𝑏0 (intercept)
+numerator = np.sum((X - mean_X) * (Y - mean_Y))
+denominator = np.sum((X - mean_X) ** 2)
+b1 = numerator / denominator
+b0 = mean_Y - b1 * mean_X
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Calculate the coefficient of linear correlation (r)
+r = numerator / (np.sqrt(np.sum((X - mean_X) ** 2)) * np.sqrt(np.sum((Y - mean_Y) ** 2)))
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
+# Print 𝑏1, 𝑏0, and r
+print("𝑏1 (slope):", b1)
+print("𝑏0 (intercept):", b0)
+print("Coefficient of linear correlation (r):", r)
 
-# Translations
-*.mo
-*.pot
+# Create the linear regression model
+Y_pred = b0 + b1 * X
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+# Plot the curve of X vs Y and the linear regression line
+plt.scatter(X, Y, color='b', label='Data Points')
+plt.plot(X, Y_pred, color='r', label='Linear Regression Line')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Linear Regression Fit')
+plt.legend()
+plt.grid(True)
+plt.show()
 
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-#   in version control.
-#   https://pdm.fming.dev/#use-with-ide
-.pdm.toml
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
