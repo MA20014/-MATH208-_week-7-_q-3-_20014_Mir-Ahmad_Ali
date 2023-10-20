@@ -19,8 +19,8 @@ b0 = mean_Y - b1 * mean_X
 r = numerator / (np.sqrt(np.sum((X - mean_X) ** 2)) * np.sqrt(np.sum((Y - mean_Y) ** 2)))
 
 # Print 𝑏1, 𝑏0, and r
-print("𝑏1 (slope):", b1)
-print("𝑏0 (intercept):", b0)
+print("𝑏1 :", b1)
+print("𝑏0 :", b0)
 print("Coefficient of linear correlation (r):", r)
 
 # Create the linear regression model
